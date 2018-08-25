@@ -3,11 +3,11 @@
     padding: 0;
 }
 
-html, body
-{
+html,
+body {
     background: url('../img/bg.jpg');
     repeat: no-repeat;
-    background-attachment:fixed;
+    background-attachment: fixed;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bg.jpg', sizingMethod='scale');
     -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bg.jpg', sizingMethod='scale');
     background-size: cover;
@@ -16,23 +16,56 @@ html, body
 }
 
 .aword-box {
-    width: 80%;
-    max-width: 1000px;
+    width: 100%;
+    /* max-width: 1500px; */
     margin: auto;
     text-align: center;
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: 0;
     right: 0;
 }
 
+.aword-box-pos {
+    width: 70%;
+    height: auto;
+    float: left;
+    margin-left: 200px;
+}
+
+.prideitemwrapper {
+    float: left;
+    width: 30%;
+    height: auto;
+    margin: auto;
+    margin-top: 70px;
+}
+
+.prideitemwrapper .pridebtn {
+    width: 300px;
+    margin-bottom: 50px;
+    background: #ffd064;
+}
+
+.prideitemwrapper .pridebtn-has {
+    width: 300px;
+    margin-bottom: 50px;
+    background: #a9b5ba;
+    cursor: not-allowed;
+}
+
+.pride-img-wrapper img {
+    margin-right: 12px;
+    width: 98%;
+    display: none;
+}
 
 .awordaction {
     float: left;
-    width: 420px;
+    width: 40%;
     height: auto;
     margin: auto;
-    padding-left: 100px;
+    /* padding-left: 100px; */
 }
 
 .awordaction p {
@@ -63,14 +96,17 @@ html, body
     margin: auto;
     color: #ffffff;
     cursor: pointer;
-    
     /* margin-right: 10px; */
 }
-.actionwrapper{
+
+.actionwrapper {
     height: 80px;
-    display: none;
+    padding-right: 10px;
+    /* display: none; */
 }
-.pnumwrapper,.pnum{
+
+.pnumwrapper,
+.pnum {
     width: 400px;
     line-height: 80px;
     text-align: center;
@@ -78,53 +114,56 @@ html, body
     border-radius: 10px;
     margin: auto;
     margin-bottom: 20px;
+    display: none;
 }
 
-.messagewrapper{
+.messagewrapper {
     text-align: center;
     font-size: 30px;
     display: none;
 }
 
-.confirmnum{
-    color:red;
+.confirmnum {
+    color: red;
 }
 
-.remainnum{
-    color:green;
+.remainnum {
+    color: green;
 }
 
-.pnum{
+.pnum {
     height: 80px;
     width: 390px;
 }
 
-.reset{
+.reset {
     background: #499940;
     float: right;
 }
 
-.confirm{
+.confirm {
     width: 400px;
     background: #24ADD7;
 }
+
 .start {
     background: #24ADD7;
-    float:left;
+    float: left;
 }
 
 .stop {
     background: #FC6666;
-    float:left;
+    float: left;
 }
+
+/* 中奖清单样式 */
 
 .awordlist {
     float: left;
-    width: 450px;
+    width: 30%;
     height: 500px;
     background: #666;
     margin-top: 30px;
-    margin-left: 30px;
     background: #ffffff;
     overflow: hidden;
 }
@@ -144,29 +183,54 @@ html, body
     font-size: 30px;
 }
 
-
 table.list {
-    margin-top:15px;
-    border-collapse:collapse;
-    border:1px solid #aaa;
-    width:100%;
-  }
-  table.list th {
-    vertical-align:baseline;
-    padding:5px 15px 5px 6px;
-    background-color:#3F3F3F;
-    border:1px solid #3F3F3F;
-    text-align:left;
-    color:#fff;
-  }
-  table.list td {
-    vertical-align:text-top;
-    padding:6px 15px 6px 6px;
-    border:1px solid #aaa;
-  }
-  table.list tr:nth-child(odd) {
-    background-color:#F5F5F5;
-  }
-  table.list tr:nth-child(even) {
-    background-color:#fff;
-  }
+    margin-top: 15px;
+    border-collapse: collapse;
+    border: 1px solid #aaa;
+    width: 100%;
+}
+
+table.list th {
+    vertical-align: baseline;
+    padding: 5px 15px 5px 6px;
+    background-color: #3F3F3F;
+    border: 1px solid #3F3F3F;
+    text-align: left;
+    color: #fff;
+}
+
+table.list td {
+    vertical-align: text-top;
+    padding: 6px 15px 6px 6px;
+    border: 1px solid #aaa;
+}
+
+table.list tr:nth-child(odd) {
+    background-color: #F5F5F5;
+}
+
+table.list tr:nth-child(even) {
+    background-color: #fff;
+}
+
+.hot {
+    display: inline-block;
+    padding: 1px 0;
+    color: #fff;
+    width: 14px;
+    line-height: 12px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.hot1 {
+    background: #f54545;
+}
+
+.hot2 {
+    background: #ff8547;
+}
+
+.hot3 {
+    background: #ffac38;
+}

@@ -1,13 +1,5 @@
-// $.ajax({
-//     url:"../list.json",
-//     type:"get",
-//     success:function(data){
-//         console.log(data);
-//     }
-// });
-
-
 var data = [];
+var pridedata = [];
 
 //第几批抽奖
 var times = 0;
@@ -29,12 +21,36 @@ var t;
 //抽奖人数
 var quantity=0;
 
-//输入人数点击确定
-function confirm(){
-    quantity = $("#pnum").val();
+//当前抽取的奖项
+var currentPrideId = 0;
+
+//打印顺序 默认是从奖项的末尾开始选择而不是选择一等奖开始
+var printorder = false;
+/**
+ * 选择奖项
+ */
+function chosepride(itemId){
+    itemId = parseInt(itemId);
+    currentPrideId = itemId;
+    item = pridedata[itemId-1];
+    if($("#pride"+itemId).hasClass("pridebtn-has")){
+        alert("您已经抽过该奖项了");
+        return;
+    }
+    
+    $(".pride-img-wrapper img").attr("src",item.pridePic);
+    $(".pride-img-wrapper img").show();
+    
+    for(var i = 1; i <= pridedata.length;i++){
+        if(i == itemId)
+            continue;
+        $("#pride"+i).hide();
+    }
+
+    quantity = parseInt(item.prideNum);
     if(quantity > 0){
-        $(".pnumwrapper").hide();
-        $(".actionwrapper").show();
+        // $(".pnumwrapper").hide();
+        // $(".actionwrapper").show();
         $(".messagewrapper").show();
         $(".remainnum").html(quantity);
         $(".confirmnum").html(0);
@@ -65,7 +81,18 @@ function successmp3pause(){
 
 function init(){
     times++;
-    contructor(500);
+    //加载奖项
+    pridedata = getPride();
+    pridedata.forEach(function(prideitem){
+        divtmp = '<div class="aword-btn pridebtn" id="pride'+prideitem.id+'" onselectstart="return false;" onclick="chosepride('+prideitem.id+')">'+prideitem.prideItem+'</div>';
+        $(".prideitemwrapper").append(divtmp);
+        // prideitem.prideNum;
+        // prideitem.pridePic;
+    });
+    
+    //加载中奖者清单
+    data = getData();
+    //contructor(500);
     var phonenum = null;
     data.forEach(function(item){
         xinm.push(item.name);
@@ -102,17 +129,33 @@ function contructor(vnum){
     }
 }
 
+function showPrideItemBtn(){
+    for(var i = 1; i <= pridedata.length;i++){
+        prideItem = $("#pride"+i);
+        if(prideItem.css("display") === "none"){
+            prideItem.show();
+        }else{
+            if(remainder !==  parseInt(pridedata[i-1].prideNum))
+                prideItem.removeClass("pridebtn").addClass("pridebtn-has");
+        }
+    }
+    $(".pride-img-wrapper img").hide();
+}
+
 //重置抽奖
 function reset(){
+    if(remainder > 0 && quantity - remainder > 0)
+        return;
+
+    showPrideItemBtn();
     times++;
-    $(".pnumwrapper").show();
-    $(".actionwrapper").hide();
+    // $(".pnumwrapper").show();
+    // $(".actionwrapper").hide();
     $(".messagewrapper").hide();
-    $("#pnum").val(null);
     num = 0;
     remainder = 0;
     runing = true;
-    $("table.list>tbody").remove();
+    // $("table.list>tbody").remove();
     $("#startaudio")[0].pause();
     $("#successaudio")[0].pause();
     $("#startaudio")[0].load();
@@ -170,11 +213,22 @@ function stop(){
 /**
  * 打印中奖者，从剩下数据中去除中将者
  */
-function print(){
+function print(prideId){
     if(remainder >= 1){
         if(xinm.length === 1)
             num = 0;
-        $('.list').prepend("<tr><td style='width:20%'>"+remainder+"</td><td style='width:30%'>"+xinm[num]+"</td><td style='width:50%'>"+phone[num]+"</td></tr>");
+        
+        temtr = "<tr><td style='width:20%'><span class='hot hot"+currentPrideId+"'>"+currentPrideId+"</span></td><td style='width:30%'>"+xinm[num]+"</td><td style='width:50%'>"+phone[num]+"</td></tr>";
+
+        if(times === 1 && currentPrideId === 1){
+            printorder = true;  // 打印顺序 true为正序说明第一个开始抽的是一等奖  false为逆序说明第一个开始抽的是末尾的奖项
+        }
+            
+        if(printorder){
+            $('.list').append(temtr);
+        }else{
+            $('.list').prepend(temtr);
+        }
         // console.log("num is :"+num);
         // console.log("remainder is :"+num);
         //send2back({"times":times,"id":ids[num],"name":xinm[num],"phone":phone[num]});
@@ -187,4 +241,5 @@ function print(){
         $(".confirmnum").html(quantity-remainder);
     }
 }
+
 init();

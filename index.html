@@ -9,50 +9,61 @@
 
 <body>
     <div class="aword-box">
-        <div class="awordaction">
-            <p><b>抽奖活动</b></p>
-            <span class="name">姓名</span><br />
-            <span class="phone">电话</span><br />
-            <div class="pnumwrapper">
-                <input class="pnum" id="pnum" type="number" placeholder="输入人数"/>
-                <div class="aword-btn confirm" id="confirmbtn" onselectstart="return false;" onclick="confirm()">确定</div>
+        <div class="aword-box-pos">
+            <div class="prideitemwrapper">
+                <!-- <div class="aword-btn pridebtn" id="pride1" id="btntxt" onselectstart="return false;" onclick="chosepride(1)">一等奖</div> -->
+                <!-- <div class="aword-btn pridebtn" id="pride2" id="btntxt" onselectstart="return false;" onclick="chosepride(2)">二等奖</div> -->
+                <!-- <div class="aword-btn pridebtn" id="pride3" id="btntxt" onselectstart="return false;" onclick="chosepride(3)">三等奖</div> -->
+                <div class="pride-img-wrapper">
+                    <img  src="img/pride1.png" alt="">
+                </div>
             </div>
-            <div class="actionwrapper">
-                <div class="aword-btn start" id="btntxt" onselectstart="return false;" onclick="start()">开始</div>
-                <div class="aword-btn reset" id="reset" onselectstart="return false;" onclick="reset()">重置</div>
+            <div class="awordaction">
+                <p><b>抽奖活动</b></p>
+                <span class="name">姓名</span><br />
+                <span class="phone">电话</span><br />
+                <div class="pnumwrapper">
+                    <input class="pnum" id="pnum" type="number" placeholder="输入人数" />
+                    <div class="aword-btn confirm" id="confirmbtn" onselectstart="return false;" onclick="confirm()">确定</div>
+                </div>
+                <div class="actionwrapper">
+                    <div class="aword-btn start" id="btntxt" onselectstart="return false;" onclick="start()">开始</div>
+                    <div class="aword-btn reset" id="reset" onselectstart="return false;" onclick="reset()">重置</div>
+                </div>
+
             </div>
-            
+            <div class="awordlist">
+                <div class="messagewrapper">
+                    <span>已抽取<span class="confirmnum">0</span>名，剩余<span class="remainnum">0</span>名</span>
+                </div>
+                <p class="p1">中奖者名单</p>
+                <div class="listwrapper">
+                    <table class="list">
+                        <thead>
+                            <tr>
+                                <td>序号</td>
+                                <td>姓名</td>
+                                <td>电话</td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="awordlist">
-            <div class="messagewrapper">
-                <span>已抽取<span class="confirmnum">0</span>名，剩余<span class="remainnum">0</span>名</span>
-            </div>
-            <p class="p1">中奖者名单</p>
-            <div class="listwrapper">
-                <table class="list">
-                    <thead>
-                        <tr>
-                            <td>序号</td>
-                            <td>姓名</td>
-                            <td>电话</td>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
+
     </div>
     <div id="audiowrapper">
-        <audio id="startaudio" preload="preload" crossorigin="anonumous" id="audio0" data-time="73">
-            <source src="https://pic.ibaotu.com/00/55/80/88a888piCEdX.mp3">
+        <audio id="startaudio" src="./asset/cj.mp3" preload="preload">
         </audio>
-        <audio id="successaudio" preload="preload" crossorigin="anonumous" id="audio0" data-time="73">
-            <source src="https://pic.ibaotu.com/00/42/84/01y888piCPEd.mp3">
+        <audio id="successaudio" src="./asset/success.mp3" preload="preload">
         </audio>
     </div>
-    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/list.js"></script>
+    <script type="text/javascript" src="js/prideitem.js"></script>
     <script type="text/javascript" src="js/cj.js"></script>
+
     <script>
-        
     </script>
 </body>
 
