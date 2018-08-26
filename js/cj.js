@@ -30,6 +30,9 @@ var printorder = false;
  * 选择奖项
  */
 function chosepride(itemId){
+    if($("#pride"+itemId).attr("onclick") === undefined || $("#pride"+itemId).attr("onclick") === ""){
+        return;
+    }
     itemId = parseInt(itemId);
     currentPrideId = itemId;
     item = pridedata[itemId-1];
@@ -37,9 +40,18 @@ function chosepride(itemId){
         alert("您已经抽过该奖项了");
         return;
     }
-    
+
+    //使奖项按钮不可用
+    $("#pride"+itemId).removeAttr("onclick");
+    $("#pride"+itemId).css("cursor","not-allowed");
+
+    //显示奖品图片
     $(".pride-img-wrapper img").attr("src",item.pridePic);
     $(".pride-img-wrapper img").show();
+
+    //使重置按钮可用
+    $(".reset").attr("onclick","reset()");
+    $(".reset").css("cursor","pointer");
     
     for(var i = 1; i <= pridedata.length;i++){
         if(i == itemId)
@@ -140,15 +152,31 @@ function showPrideItemBtn(){
         }
     }
     $(".pride-img-wrapper img").hide();
+    
 }
 
 //重置抽奖
 function reset(){
+
+    //已经开始抽奖,不可重置
     if(remainder > 0 && quantity - remainder > 0)
         return;
 
+    //还未开始抽奖
+    if(quantity === remainder){
+        $("#pride"+currentPrideId).attr("onclick","chosepride("+(currentPrideId)+")");
+        $("#pride"+currentPrideId).css("cursor","pointer");
+    }else{
+        times++;
+    }
+    
+    //使重置按钮不可用
+    $(".reset").removeAttr("onclick");
+    $(".reset").css("cursor","not-allowed");
+    
+
     showPrideItemBtn();
-    times++;
+    
     // $(".pnumwrapper").show();
     // $(".actionwrapper").hide();
     $(".messagewrapper").hide();
